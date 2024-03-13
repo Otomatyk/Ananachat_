@@ -1,0 +1,41 @@
+{
+	"name": "ananachat",
+	"private": true,
+	"version": "0.0.0",
+	"type": "module",
+	"scripts": {
+		"dev": "npx vite --mode developpement",
+		"build": "vite build",
+		"preview": "vite preview",
+		"check": "svelte-check --tsconfig ./tsconfig.json"
+	},
+	"devDependencies": {
+		"@sveltejs/vite-plugin-svelte": "^2.4.2",
+		"@tsconfig/svelte": "^5.0.0",
+		"@types/sanitize-html": "^2.9.5",
+		"@types/serviceworker": "^0.0.81",
+		"autoprefixer": "^10.4.16",
+		"daisyui": "^4.4.19",
+		"postcss": "^8.4.31",
+		"prettier": "^3.2.5",
+		"prettier-plugin-svelte": "^3.2.1",
+		"prettier-plugin-tailwindcss": "^0.5.11",
+		"svelte": "^4.0.5",
+		"tailwindcss": "^3.4.0",
+		"tailwindcss-animated": "^1.0.1",
+		"tslib": "^2.6.0",
+		"typescript": "^5.0.2",
+		"vite": "^4.4.5",
+		"vite-plugin-mkcert": "^1.17.1",
+		"vite-plugin-pwa": "^0.17.4"
+	},
+	"dependencies": {
+		"@dicebear/collection": "^7.0.1",
+		"@dicebear/core": "^7.0.1",
+		"@resvg/resvg-js": "^2.0.0",
+		"@vitejs/plugin-basic-ssl": "^1.0.2",
+		"pocketbase": "^0.19.0",
+		"sanitize-html": "^2.11.0",
+		"sharp": "^0.30.4"
+	}
+}

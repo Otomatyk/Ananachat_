@@ -1,0 +1,234 @@
+/*"an" prefix means "Ananachat"*/
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+	/*Deprecated classes*/
+	.outset-box,
+	.outset-box-md,
+	.outset-box-lg,
+	.deemphasized-text,
+	.tertiary-btn,
+	.file-button-icon,
+	.static-color,
+	.custom-scrollbar,
+	.custom-fade-up {
+		@apply fixed z-50 size-[50vmin] bg-green-900;
+	}
+
+	.an-outset-box {
+		--outset-box-width-factor: 1;
+	}
+	.an-outset-box-md {
+		--outset-box-width-factor: 1.5;
+	}
+	.an-outset-box-lg {
+		--outset-box-width-factor: 2;
+	}
+
+	.an-retracted-outset-box {
+		transform: translateY(var(--outset-box-width));
+		box-shadow: none;
+	}
+
+	:is(.an-outset-box, .an-outset-box-md, .an-outset-box-lg):not(
+			.input-error
+		) {
+		--outset-box-color: var(--outset-box);
+	}
+
+	.an-outset-box,
+	.an-outset-box-md,
+	.an-outset-box-lg {
+		--outset-box-final-width: calc(
+			var(--outset-box-width) * var(--outset-box-width-factor)
+		);
+
+		box-shadow: 0px var(--outset-box-final-width) 0px 0px
+			var(--outset-box-color);
+	}
+
+	.an-deemphasized-text {
+		color: var(--deemphasized-text);
+	}
+	.an-muted-text {
+		color: var(--deemphasized-text);
+	}
+}
+
+@layer components {
+	.an-file-input-image {
+		@apply indicator relative;
+
+		& img {
+			@apply avatar;
+		}
+		& input[type="file"] {
+			@apply an-file-button-icon rounded-full hover:backdrop-brightness-50 focus-visible:backdrop-brightness-50;
+		}
+
+		& div {
+			@apply grid size-8 rounded-full bg-base-100 p-0;
+		}
+		& div svg {
+			@apply size-1/2 place-self-center;
+		}
+	}
+
+	.an-tertiary-btn {
+		@apply btn-link text-base-content no-underline hover:underline;
+	}
+
+	/*DAISY UI COMPONENTS*/
+
+	.label-text {
+		@apply text-lg font-medium text-base-content;
+	}
+
+	.form-control {
+		@apply mb-7;
+
+		> span:first-child {
+			@apply mb-2 block text-xl;
+		}
+	}
+
+	.file-input::file-selector-button {
+		@apply border-transparent bg-base-200;
+	}
+
+	.btn {
+		@apply no-animation translate-x-0 translate-y-0 transition-none;
+
+		&[disabled] {
+			@apply an-outset-box;
+		}
+
+		&:not([disabled]) {
+			box-shadow: 0px var(--outset-box-width) 0px 0px
+				color-mix(in oklab, oklch(var(--btn-color)) 80%, black 30%);
+		}
+
+		&:not(.tertiary-btn):active {
+			@apply an-retracted-outset-box;
+		}
+	}
+
+	.input,
+	.textarea,
+	.radio,
+	.file-input {
+		@apply an-outset-box;
+	}
+
+	.input-error,
+	.textarea-error,
+	.file-button-error {
+		--outset-box-color: color-mix(
+			in oklab,
+			oklch(var(--er)) 70%,
+			var(--outset-box)
+		);
+	}
+
+	.avatar {
+		@apply aspect-square h-16 min-h-12 w-16 min-w-12 rounded-full;
+	}
+	.avatar > img {
+		@apply rounded-full;
+	}
+
+	.toast > .alert {
+		@apply font-bold;
+	}
+	/*-----*/
+
+	@keyframes custom-fade-up {
+		from {
+			transform: translateY(80%);
+		}
+		to {
+			transform: translateY(0%);
+		}
+	}
+
+	.left-rail {
+		@apply border-l-4 border-base-content/10 pl-4;
+	}
+
+	.an-dropdown-element {
+		@apply relative top-0 flex h-[1.5em] w-[20ch] items-center rounded-btn px-2 py-6 text-xl hover:bg-primary hover:text-white active:top-[1px];
+	}
+	.an-dropdown-menu {
+		@apply z-10 w-fit gap-1 rounded-btn bg-base-200/50;
+	}
+	.an-dropdown-bg {
+		@apply z-10 rounded-btn bg-base-300 shadow-lg shadow-base-100;
+	}
+
+	.an-file-button-icon {
+		@apply absolute left-0 top-0 size-full file:opacity-0;
+	}
+
+	* {
+		&::-webkit-scrollbar-track-piece {
+			background: oklch(var(--b1));
+			border-radius: 999px;
+		}
+
+		&::-webkit-scrollbar-thumb {
+			background-color: color-mix(
+				in oklab,
+				oklch(var(--bc)) 20%,
+				oklch(var(--b1))
+			);
+			border-radius: 999px;
+		}
+
+		&::-webkit-scrollbar {
+			width: 0.5rem;
+			height: 0.5rem;
+			border-radius: 999px;
+		}
+	}
+}
+
+@layer base {
+	input[type="text"]::placeholder {
+		color: color-mix(in srgb, oklch(var(--b1)) 50%, oklch(var(--bc)));
+	}
+
+	label:has(input[required]) > span::after {
+		@apply ml-2 text-[#f23f42] content-["*"];
+	}
+
+	label {
+		@apply mb-1 block w-full md:text-lg lg:text-xl;
+	}
+	textarea {
+		@apply resize-none;
+	}
+
+	svg:not(.an-static-color) {
+		@apply fill-[--deemphasized-text];
+	}
+
+	.material-symbols-rounded:not(.an-static-color) {
+		@apply text-[--deemphasized-text];
+	}
+	.material-symbols-rounded {
+		@apply grid place-content-center font-black;
+	}
+
+	[hidden] {
+		visibility: hidden;
+		display: none;
+	}
+
+	* {
+		scrollbar-color: var(--b1) var(--b2);
+		scrollbar-width: 0.5rem;
+	}
+}
